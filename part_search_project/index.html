@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Auto Part Search Helper</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+  <script>
+
+var stateObject = {'2009': {'Audi': {'A3': ['3.2L', '2.0L'],
+   'A5': ['3.2L'],
+   'Q7': ['4.2L', '3.6L', '3.0L'],
+   'A4': ['2.0L', '3.2L'],
+   'Q5': ['3.2L']},
+  'Nissan': {'370Z': ['3.7L'],
+   'Cube': ['1.8L'],
+   'Pathfinder': ['4.0L', '5.6L']},
+  'Maybach': {'Landaulet': ['6.0L']},
+  'Hyundai': {'Elantra': ['2.0L']},
+  'Infiniti': {'EX': ['3.5L'], 'M': ['3.5L'], 'G37': ['3.7L']},
+  'BMW': {'7': ['4.4L']},
+  'Lotus': {'Elise': ['1.8L'], 'Exige': ['1.8L']},
+  'Chevrolet': {'Silverado': ['6.0L']}},
+ '2012': {'Acura': {'TL': ['3.5L', '3.7L'],
+   'RL': ['3.7L'],
+   'TSX': ['2.4L', '3.5L'],
+   'ZDX': ['3.7L'],
+   'MDX': ['3.7L']},
+  'Chevrolet': {'Colorado': ['2.9L', '3.7L', '5.3L'],
+   'Express': ['5.3L', '4.3L'],
+   'Camaro': ['3.6L', '6.2L'],
+   'Corvette': ['7.0L', '6.2L'],
+   'Cruze': ['1.8L', '1.4L'],
+   'Equinox': ['2.4L', '3.0L'],
+   'Nitro': ['4.0L'],
+   'Impala': ['3.6L'],
+   'Malibu': ['2.4L', '3.6L'],
+   'Sonic': ['1.8L', '1.4L'],
+   'Traverse': ['3.6L']},
+  'Bentley': {'Continental': ['6.0L'], 'Mulsanne': ['6.8L']},
+  'Volvo': {'S60': ['2.5L', '3.0'],
+   'S80': ['3.0', '3.2'],
+   'XC60': ['3.0', '3.2'],
+   'XC70': ['3.0', '3.2'],
+   'XC90': ['3.2'],
+   'C30': ['2.5L'],
+   'C70': ['2.5L']},
+  'Audi': {'A3': ['2.0L'],
+   'A4': ['2.0L'],
+   'A5': ['2.0L'],
+   'A6': ['3.0L'],
+   'A7': ['3.0L'],
+   'Q5': ['2.0L', '3.2L'],
+   'Q7': ['3.0L'],
+   'R8': ['4.2L', '5.2L'],
+   'S4': ['3.0L'],
+   'S5': ['4.2L'],
+   'A8': ['4.2L', '6.3L'],
+   'TT': ['2.5L']},
+  'Ford': {'Fiesta': ['1.6L'],
+   'Focus': ['2.0L'],
+   'Fusion': ['2.5L', '3.0L', '3.5L'],
+   'Mustang': ['3.7L', '5.0L', '5.4L'],
+   'Taurus': ['3.5L'],
+   'Edge': ['3.5L', '3.7L', '2.0L'],
+   'Flex': ['3.5L'],
+   'Escape': ['2.5L', '3.0L'],
+   'Explorer': ['3.5L', '2.0L'],
+   'Transit': ['2.0L'],
+   'E-150': ['4.6L', '5.4L'],
+   'E-350': ['5.4L', '6.8L'],
+   'E-250': ['4.6L', '5.4L'],
+   'Expedition': ['5.4L']},
+  'Hyundai': {'Accent': ['1.6L'],
+   'Elantra': ['1.8L', '2.0L'],
+   'Genesis': ['4.6L', '3.8L', '5.0L', '2.0L'],
+   'Sonata': ['2.4L', '2.0L'],
+   'Tucson': ['2.0L', '2.4L'],
+   'Veloster': ['1.6L'],
+   'Equus': ['5.0L'],
+   'Santa': ['3.5L', '2.4L'],
+   'Veracruz': ['3.8L']},
+  'Kia': {'Sedona': ['3.5L'],
+   'Sorento': ['2.4L', '3.5L'],
+   'Sportage': ['2.4L', '2.0L'],
+   'Forte': ['2.0L', '2.4L'],
+   'Optima': ['2.4L', '2.0L'],
+   'Rio': ['1.6L'],
+   'Soul': ['1.6L', '2.0L']},
+  'Mitsubishi': {'Eclipse': ['3.8L', '2.4L'],
+   'Galant': ['2.4L'],
+   'Outlander': ['3.0L']},
+  'Nissan': {'Altima': ['2.5L', '3.5L'],
+   'Sentra': ['2.5L', '2.0L'],
+   'Versa': ['1.8L', '1.6L'],
+   'Titan': ['5.6L'],
+   '370Z': ['3.7L'],
+   'JUKE': ['1.6L'],
+   'Xterra': ['4.0L'],
+   'Pathfinder': ['4.0L', '5.6L'],
+   'Armada': ['5.6L']},
+  'Mazda': {'Mazda5': ['2.5L'],
+   'Mazda6': ['2.5L', '3.7L'],
+   'Mazda2': ['1.5L'],
+   'Mazda3': ['2L', '2.0L', '2.5L'],
+   'Mazdaspeed3': ['2.3L'],
+   'MX-5': ['2.0L'],
+   'CX-9': ['3.7L']},
+  'Infiniti': {'M': ['3.5L', '3.7L', '5.6L'],
+   'G25': ['2.5L'],
+   'G37': ['3.7L'],
+   'IPL': ['3.7L'],
+   'EX': ['3.5L'],
+   'FX': ['3.5L', '5.0L'],
+   'QX56': ['5.6L']},
+  'Toyota': {'Yaris': ['1.5L'],
+   'Highlander': ['2.7L', '3.5L'],
+   'Camry': ['2.5L', '3.5L'],
+   'FJ': ['4.0L'],
+   'Sienna': ['2.7L', '3.5L'],
+   '4Runner': ['4.0L'],
+   'Sequoia': ['4.6L', '5.7L']},
+  'Subaru': {'Impreza': ['2.0L'],
+   'Legacy': ['2.5L', '3.6L'],
+   'Outback': ['2.5L'],
+   'Forester': ['2.5L']},
+  'Land Rover': {'Rover': ['Rover']},
+  'Scion': {'tC': ['2.5L'], 'xB': ['2.4L']},
+  'MINI': {'Cooper': ['1.6L'], 'Clubman': ['1.6L'], 'Countryman': ['1.6L']},
+  'Aston Martin': {'Martin': ['Martin']},
+  'Buick': {'Enclave': ['3.6L'],
+   'Lacrosse': ['2.4L', '3.6L'],
+   'Regal': ['2.0L', '2.4L'],
+   'Verano': ['2.4L']},
+  'BMW Motorrad': {'1': ['3.0L'], '3': ['3.0L']},
+  'BMW': {'1': ['3.0L'],
+   '3': ['3.0L', '4.0L'],
+   '5': ['2.0L', '3.0L', '4.4L'],
+   '7': ['3.0L']},
+  'Jeep': {'Compass': ['2.4L', '2.0L'],
+   'Liberty': ['3.7L'],
+   'Patriot': ['2.4L', '2.0L'],
+   'Wrangler': ['3.6L']},
+  'Lexus': {'IS': ['2.5L', '3.5L', '5.0L'],
+   'ES': ['3.5L'],
+   'LS': ['4.6L'],
+   'RX': ['3.5L'],
+   'LFA': ['4.8L']},
+  'Honda': {'Accord': ['2.4L', '3.5L'],
+   'Civic': ['1.8L', '2.4L'],
+   'CR-Z': ['1.5L'],
+   'Fit': ['1.5L'],
+   'Odyssey': ['3.5L'],
+   'Pilot': ['3.5L']},
+  'Dodge': {'Durango': ['3.6L', '5.7L'],
+   'Charger': ['5.7L'],
+   'Challenger': ['3.6L', '5.7L', '6.4L'],
+   'Avenger': ['2.4L', '3.6L'],
+   'Caliber': ['2.0L'],
+   'Grand': ['3.6L'],
+   'Journey': ['2.4L', '3.6L']},
+  'Grand Cherokee': {'Grand': ['6.4L', '3.6L', '5.7L']},
+  'Volkswagen': {'Tiguan': ['2.0L'],
+   'Jetta': ['2.0L', '2.5L'],
+   'CC': ['2.0L', '3.6L'],
+   'Passat': ['2.5L', '2.0L'],
+   'Touareg': ['3.6L', '3.0L'],
+   'Golf': ['2.5L', '2.0L'],
+   'Routan': ['3.6L'],
+   'GTI': ['2.0L'],
+   'Beetle': ['2.5L', '2.0L']},
+  'GMC': {'Acadia': ['3.6L'],
+   'Terrain': ['2.4L', '3.0L'],
+   'Yukon': ['5.3L', '6.0L'],
+   'Savana': ['5.3L', '4.8L', '6.0L', '4.3L']},
+  'Cadillac': {'CTS': ['3.6L', '3.0L'],
+   'CTS-V': ['6.2L'],
+   'SRX': ['3.6L'],
+   'Escalade': ['6.2L', '6.0L']},
+  'Jaguar': {'XF': ['5.0L'], 'XJ': ['5.0L'], 'XK': ['5.0L']},
+  'Suzuki': {'Kizashi': ['2.4L'], 'SX4': ['2.0L']},
+  'Saab': {'9-3': ['2.0L']},
+  'Lincoln': {'MKZ': ['3.5L'],
+   'MKS': ['3.7L', '3.5L'],
+   'MKX': ['3.7L'],
+   'MKT': ['3.7L', '3.5L'],
+   'Navigator': ['5.4L']},
+  'Lamborghini': {'Gallardo': ['5.2L']}},
+ '2010': {'BMW': {'X5': ['4.4L', '3.0L', '4.8L'],
+   'X6': ['4.4L', '3.0L'],
+   '1': ['3.0L'],
+   '3': ['3.0L'],
+   '5': ['3.0L', '4.8L', '4.4L'],
+   '6': ['4.8L'],
+   '7': ['4.4L', '6.0L'],
+   'M3': ['4.0L'],
+   'M6': ['5.0L'],
+   'X3': ['3.0L'],
+   'Z4': ['3.0L']},
+  'Chevrolet': {'Colorado': ['2.9L', '3.7L', '5.3L'],
+   'Express': ['5.3L', '4.3L'],
+   'Silverado': ['4.3L', '4.8L', '6.0L', '5.3L', '6.2L'],
+   'Aveo5': ['1.6L'],
+   'Camaro': ['3.6L', '6.2L'],
+   'Corvette': ['7.0L', '6.2L'],
+   'Equinox': ['2.4L'],
+   'HHR': ['2.2L', '2.4L', '2.0L'],
+   'Impala': ['3.5L', '3.9L'],
+   'Malibu': ['2.4L', '3.6L'],
+   'Suburban': ['5.3L'],
+   'Tahoe': ['5.3L', '6.0L'],
+   'Traverse': ['3.6L'],
+   'Avalanche': ['5.3L']},
+  'Nissan': {'370Z': ['3.7L'],
+   'Altima': ['2.5L', '3.5L'],
+   'Matrix': ['1.8L'],
+   'Armada': ['5.6L'],
+   'Cube': ['1.8L'],
+   'Pathfinder': ['4.0L', '5.6L'],
+   'Sentra': ['2.0L', '2.5L'],
+   'Versa': ['1.8L', '1.6L'],
+   'Xterra': ['4.0L'],
+   'Frontier': ['4.0L', '2.5L'],
+   'Titan': ['5.6L']},
+  'Volvo': {'C30': ['2.5L'],
+   'C70': ['2.5L'],
+   'S40': ['2.4L', '2.5L'],
+   'S80': ['4.4L', '3.0L', '3.2L'],
+   'V50': ['2.5L', '2.4L'],
+   'XC60': ['3.0L', '3.2L'],
+   'XC70': ['3.0L', '3.2L'],
+   'XC90': ['3.2L', '4.4L'],
+   'V70': ['3.2L']},
+  'Bentley': {'Brooklands': ['6.8L'],
+   'Continental': ['6.0L'],
+   'Azure': ['6.8L']},
+  'Toyota': {'4Runner': ['2.7L', '4.0L'],
+   'Avalon': ['3.5L'],
+   'Camry': ['2.5L', '3.5L'],
+   'Corolla': ['1.8L', '2.4L'],
+   'FJ': ['4.0L'],
+   'Highlander': ['2.7L', '3.5L'],
+   'Land': ['5.7L'],
+   'Matrix': ['1.8L', '2.4L'],
+   'RAV4': ['2.5L', '3.5L'],
+   'Sequoia': ['4.6L', '5.7L'],
+   'Sienna': ['3.5L'],
+   'Venza': ['2.7L', '3.5L'],
+   'Yaris': ['1.5L'],
+   'Tacoma': ['2.7L', '4.0L'],
+   'Tundra': ['4.0L', '4.6L', '5.7L']},
+  'Honda': {'Accord': ['3.5L', '2.4L'],
+   'Civic': ['1.8L', '2.0L'],
+   'Fit': ['1.5L'],
+   'CR-V': ['2.4L'],
+   'Element': ['2.4L'],
+   'Pilot': ['3.5L'],
+   'Odyssey': ['3.5L'],
+   'Ridgeline': ['3.5L']},
+  'Audi': {'A3': ['2.0L'],
+   'A4': ['2.0L'],
+   'A5': ['2.0L', '3.2L'],
+   'A6': ['3.0L', '4.2L'],
+   'A8': ['4.2L'],
+   'Q5': ['3.2L'],
+   'Q7': ['3.6L', '3.0L', '4.2L'],
+   'R8': ['5.2L', '4.2L'],
+   'S4': ['3.0L'],
+   'S5': ['4.2L'],
+   'S6': ['5.2L']},
+  'Ford': {'Focus': ['2.0L'],
+   'Fusion': ['2.5L', '3.0L', '3.5L'],
+   'Mustang': ['4.0L', '4.6L', '5.4L'],
+   'Taurus': ['3.5L'],
+   'Edge': ['3.5L'],
+   'Flex': ['3.5L'],
+   'Escape': ['2.5L', '3.0L'],
+   'Explorer': ['4.0L', '4.6L'],
+   'Expedition': ['5.4L'],
+   'Connect': ['2.0L'],
+   'Crown': ['4.6L'],
+   'Ranger': ['2.3L', '4.0L'],
+   'F-150': ['5.4L', '4.6L']},
+  'Rolls-Royce': {'Ghost': ['6.6L'], 'Phantom': ['6.7L']},
+  'Volkswagen': {'Jetta': ['2.5L', '2.0L'],
+   'CC': ['2.0L', '3.6L'],
+   'GTI': ['2.0L'],
+   'Golf': ['2.0L', '2.5L'],
+   'Routan': ['3.8l', '4.0l'],
+   'Tiguan': ['2.0L'],
+   'Touareg': ['3.6L', '3.0L']},
+  'Maybach': {'57': ['6.0L', '5.5L'],
+   '62': ['5.5L', '6.0L'],
+   'Landaulet': ['6.0L']},
+  'Lamborghini': {'Gallardo': ['5.2L']},
+  'Lexus': {'LS': ['4.6L'],
+   'ES': ['3.5L'],
+   'GS': ['3.5L', '4.6L'],
+   'IS': ['2.5L', '3.5L', '5L'],
+   'LX': ['5.7L']},
+  'Hyundai': {'Accent': ['1.6L'],
+   'Azera': ['3.8L', '3.3L'],
+   'Elantra': ['2.0L'],
+   'Genesis': ['4.6L', '3.8L', '2.0L'],
+   'Santa': ['3.5L', '2.4L'],
+   'Sonata': ['2.4L', '3.3L'],
+   'Veracruz': ['3.8L'],
+   'Tucson': ['2.4L']},
+  'Mercedes': {'C-Class': ['3.0L', '3.5L'],
+   'CL-Class': ['5.5L'],
+   'CLS-Class': ['5.5L'],
+   'E-Class': ['5.5L', '3.5L'],
+   'G-Class': ['5.5L'],
+   'GL-Class': ['3.0L', '5.5L'],
+   'GLK-Class': ['3.5L'],
+   'R-Class': ['3.0L', '3.5L'],
+   'M-Class': ['5.5L', '3.0L', '3.5L'],
+   'SLK-Class': ['3.0L']},
+  'BMW Motorrad': {'1': ['3.0L'], '3': ['3.0L'], '5': ['3.0L']},
+  'Kia': {'Forte': ['2.0L', '2.4L'],
+   'Optima': ['2.4L', '2.7L'],
+   'Rio5': ['1.6L'],
+   'Rio': ['1.6L'],
+   'Soul': ['1.6L', '2.0L'],
+   'Sedona': ['3.8L'],
+   'Sportage': ['2.0L', '2.7L']},
+  'AMG': {'C-Class': ['6.3L'],
+   'CL-Class': ['6.2L', '6.0L'],
+   'CLS-Class': ['6.2L'],
+   'E-Class': ['6.2L']},
+  'Mazda': {'CX-7': ['2.5L', '2.3L'],
+   'CX-9': ['3.7L'],
+   'Mazda3': ['2.5L', '2.0L'],
+   'Mazdaspeed3': ['2.3L'],
+   'Mazda5': ['2.3L'],
+   'Mazda6': ['2.5L', '3.7L'],
+   'MX-5': ['2.0L'],
+   'RX-8': ['1.3L'],
+   'Tribute': ['2.5L', '3.0L']},
+  'Mercedes-Benz': {'CL-Class': ['5.5L'],
+   'GL-Class': ['4.6L'],
+   'SLK-Class': ['3.5L']},
+  'Mitsubishi': {'Eclipse': ['3.8L', '2.4L'],
+   'Endeavor': ['3.8L'],
+   'Galant': ['2.4L'],
+   'Lancer': ['2.0L', '2.4L'],
+   'Outlander': ['3.0L']},
+  'Cadillac': {'CTS-V': ['6.2L'],
+   'CTS': ['3.0L', '3.6L'],
+   'Escalade': ['6.2L', '6.0L'],
+   'DTS': ['4.6L'],
+   'SRX': ['3L', '2.8L'],
+   'STS': ['3.6L', '4.6L']},
+  'Infiniti': {'EX': ['3.5L'],
+   'FX': ['3.5L', '5.0L'],
+   'M': ['3.5L', '4.5L'],
+   'G37': ['3.7L'],
+   'QX56': ['5.6L']},
+  'Mercedes-AMG': {'G-Class': ['5.4L'],
+   'M-Class': ['6.2L'],
+   'SLK-Class': ['5.4L']},
+  'Dodge': {'Avenger': ['2.4L'],
+   'Caliber': ['2.0L', '2.4L'],
+   'Challenger': ['3.5L', '6.1L', '5.7L'],
+   'Charger': ['3.5L', '6.1L', '5.7L'],
+   'Grand': ['4.0L', '3.8L', '3.3L'],
+   'Journey': ['2.4L', '3.5L'],
+   'Nitro': ['3.7L', '4.0L'],
+   'Viper': ['8.4L'],
+   'Ram': ['3.7L', '4.7L', '5.7L'],
+   'Dakota': ['3.7L', '4.7L']},
+  'Lincoln': {'MKS': ['3.7L', '3.5L'],
+   'MKT': ['3.7L', '3.5L'],
+   'MKX': ['3.5L'],
+   'MKZ': ['3.5L'],
+   'Navigator': ['5.4L'],
+   'Town': ['4.6L']},
+  'Jeep': {'Commander': ['3.7L', '5.7L'],
+   'Compass': ['2.0L', '2.4L'],
+   'Equinox': ['2.4L'],
+   'Liberty': ['3.7L'],
+   'Patriot': ['2.0L', '2.4L'],
+   'Wrangler': ['3.8L']},
+  'GMC': {'Acadia': ['3.6L'],
+   'Terrain': ['2.4L'],
+   'Canyon': ['2.9L', '3.7L', '5.3L'],
+   'Yukon': ['5.3L', '6.2L', '6.0L'],
+   'Sierra': ['4.8L', '4.3L', '5.3L', '6.2L', '6.0L'],
+   'Savana': ['5.3L', '4.3L']},
+  'Porsche': {'911': ['3.6L', '3.8L'],
+   'Boxster': ['3.4L', '2.9L'],
+   'Cayenne': ['4.8L', '3.6L'],
+   'Cayman': ['2.9L', '3.4L']},
+  'Acura': {'MDX': ['3.7L'],
+   'RDX': ['2.3L'],
+   'ZDX': ['3.7L'],
+   'RL': ['3.7L'],
+   'TL': ['3.5L', '3.7L'],
+   'TSX': ['2.4L', '3.5L']},
+  'Buick': {'Enclave': ['3.6L'],
+   'Lacrosse': ['2.4L', '3.0L', '3.6L'],
+   'Lucerne': ['3.9L', '4.6L']},
+  'Suzuki': {'Grand': ['2.4L', '3.2L'],
+   'Kizashi': ['2.4L'],
+   'SX4': ['2.0L'],
+   'Equator': ['4.0L', '2.5L']},
+  'Saab': {'9-3': ['2.0L'], '9-5': ['2.8L']},
+  'Subaru': {'Forester': ['2.5L'],
+   'Impreza': ['2.5L'],
+   'Legacy': ['2.5L', '3.6L'],
+   'Outback': ['3.6L', '2.5L']},
+  'Aston Martin': {'Martin': ['Martin']},
+  'Grand Cherokee': {'Grand': ['3.7L', '5.7L', '6.1L']},
+  'Land Rover': {'Rover': ['Rover']},
+  'Ferrari': {'612': ['5.7L']},
+  'Chrysler': {'Sebring': ['2.4L', '2.7L', '3.5L'],
+   '300': ['2.7L', '5.7L'],
+   'Town': ['3.8L', '4.0L', '3.3L']},
+  'Scion': {'tC': ['2.4L'], 'xB': ['2.4L'], 'xD': ['1.8L']},
+  'MINI': {'Cooper': ['1.6L'], 'Clubman': ['1.6L']},
+  'Jaguar': {'XK': ['5.0L'], 'XF': ['4.2L', '5.0L'], 'XJ': ['5.0L']},
+  'Chrysler Group LLC': {'300': ['3.5L', '6.1L']},
+  'Lotus': {'Elise': ['1.8L'], 'Exige': ['1.8L']},
+  'Maserati': {'GranTurismo': ['4.2L', '4.7L'],
+   'Quattroporte': ['4.2L', '4.7L']},
+  'Mercury': {'Mariner': ['2.5L', '3.0L'], 'Milan': ['2.5L', '3.0L']}},
+ '2011': {'BMW': {'X5': ['4.4L', '3.0L'],
+   'X6': ['4.4L', '3.0L'],
+   '1': ['3.0L'],
+   '3': ['3.0L'],
+   '5': ['4.8L', '4.4L', '3.0L'],
+   '7': ['4.4L', '6.0L', '3.0L'],
+   'ActiveHybrid': ['4.4L'],
+   'ALPINA': ['4.4L'],
+   'M3': ['4.0L'],
+   'X3': ['3.0L'],
+   'Z4': ['3.0L']},
+  'Chevrolet': {'Colorado': ['2.9L', '3.7L', '5.3L'],
+   'Express': ['5.3L', '4.8L', '6.0L', '4.3L'],
+   'Silverado': ['4.3L', '4.8L', '6.0L', '5.3L', '6.2L'],
+   'Aveo': ['1.6L'],
+   'Aveo5': ['1.6L'],
+   'Camaro': ['3.6L', '6.2L'],
+   'Corvette': ['7.0L', '6.2L'],
+   'Cruze': ['1.8L', '1.4L'],
+   'Equinox': ['2.4L', '3.0L'],
+   'HHR': ['2.2L', '2.4L'],
+   'Impala': ['3.5L', '3.9L'],
+   'Malibu': ['2.4L', '3.6L'],
+   'Suburban': ['5.3L', '6.0L'],
+   'Tahoe': ['5.3L', '6.0L'],
+   'Traverse': ['3.6L'],
+   'Avalanche': ['5.3L']},
+  'Nissan': {'370Z': ['3.7L'],
+   'Altima': ['2.5L', '3.5L'],
+   'Armada': ['5.6L'],
+   'Cube': ['1.8L'],
+   'Juke': ['1.6L'],
+   'Pathfinder': ['4.0L', '5.6L'],
+   'Sentra': ['2.5L', '2.0L'],
+   'Versa': ['1.8L', '1.6L'],
+   'Xterra': ['4.0L'],
+   'Frontier': ['2.5L', '4.0L'],
+   'Titan': ['5.6L']},
+  'Volvo': {'C30': ['2.5L'],
+   'C70': ['2.5L'],
+   'S40': ['2.5L'],
+   'S60': ['3.0'],
+   'S80': ['3.2'],
+   'V50': ['2.5L'],
+   'XC60': ['3.0', '3.2'],
+   'XC70': ['3.2', '3.0'],
+   'XC90': ['3.2', '4.4L']},
+  'Bentley': {'Continental': ['6.0L']},
+  'Toyota': {'4Runner': ['4.0L'],
+   'Avalon': ['3.5L'],
+   'Camry': ['2.5L', '3.5L'],
+   'Corolla': ['1.8L'],
+   'FJ': ['4.0L'],
+   'Highlander': ['2.7L', '3.5L'],
+   'Land': ['5.7L'],
+   'Matrix': ['1.8L', '2.4L'],
+   'RAV4': ['2.5L', '3.5L'],
+   'Sequoia': ['4.6L', '5.7L'],
+   'Sienna': ['2.7L', '3.5L'],
+   'Venza': ['2.7L', '3.5L'],
+   'Yaris': ['1.5L'],
+   'Tacoma': ['2.7L', '4.0L'],
+   'Tundra': ['4.0L', '4.6L', '5.7L']},
+  'Audi': {'A3': ['2.0L'],
+   'A4': ['2.0L'],
+   'A5': ['2.0L'],
+   'A6': ['3.0L', '4.2L'],
+   'A8': ['4.2L'],
+   'Q5': ['2.0L', '3.2L'],
+   'Q7': ['3.0L'],
+   'R8': ['4.2L', '5.2L'],
+   'S4': ['3.0L'],
+   'S5': ['4.2L'],
+   'S6': ['5.2L']},
+  'Ford': {'Fiesta': ['1.6L'],
+   'Focus': ['2.0L'],
+   'Fusion': ['2.5L', '3.0L', '3.5L'],
+   'Mustang': ['3.7L', '5.0L', '5.4L'],
+   'Shelby': ['5.4L'],
+   'Taurus': ['3.5L'],
+   'Edge': ['3.5L', '3.7L'],
+   'Flex': ['3.5L'],
+   'Escape': ['2.5L', '3.0L'],
+   'Explorer': ['3.5L'],
+   'Expedition': ['5.4L'],
+   'Connect': ['2.0L'],
+   'Ranger': ['2.3L', '4.0L'],
+   'R-Class': ['3.0L'],
+   'E-150': ['4.6L', '5.4L'],
+   'E-350': ['5.4L', '6.8L'],
+   'E-250': ['4.6L', '5.4L'],
+   'F-150': ['5.0L', '3.5L', '6.2L', '3.7L']},
+  'Honda': {'Accord': ['2.4L', '3.5L'],
+   'Civic': ['1.8L', '2.0L'],
+   'CR-Z': ['1.5L'],
+   'Fit': ['1.5L'],
+   'CR-V': ['2.4L'],
+   'Element': ['2.4L'],
+   'Pilot': ['3.5L'],
+   'Odyssey': ['3.5L'],
+   'Ridgeline': ['3.5L']},
+  'Rolls-Royce': {'Ghost': ['6.6L'], 'Phantom': ['6.7L']},
+  'Volkswagen': {'Jetta': ['2.5L', '2.0L'],
+   'CC': ['2.0L', '3.6L'],
+   'GTI': ['2.0L'],
+   'Golf': ['2.5L', '2.0L'],
+   'Routan': ['3.6L'],
+   'Tiguan': ['2.0L']},
+  'Maybach': {'57': ['6.0L'], '62': ['6.0L', '5.5L'], 'Landaulet': ['6.0L']},
+  'Lamborghini': {'Gallardo': ['5.2L']},
+  'Lexus': {'LS': ['4.6L'],
+   'ES': ['3.5L'],
+   'GS': ['3.5L', '4.6L'],
+   'IS': ['3.5L', '2.5L', '5L'],
+   'LX': ['5.7L']},
+  'Hyundai': {'Accent': ['1.6L'],
+   'Azera': ['3.3L', '3.8L'],
+   'Elantra': ['1.8L', '2.0L'],
+   'Equus': ['4.6L'],
+   'Genesis': ['3.8L', '4.6L', '2.0L'],
+   'Santa': ['2.4L', '3.5L'],
+   'Sonata': ['2.4L', '2.0L'],
+   'Veracruz': ['3.8L'],
+   'Tucson': ['2.0L', '2.4L']},
+  'Kia': {'Forte': ['2.0L', '2.4L'],
+   'Optima': ['2.4L', '2.0L'],
+   'Rio': ['1.6L'],
+   'Rio5': ['1.6L'],
+   'Soul': ['1.6L', '2.0L'],
+   'Sedona': ['3.5L'],
+   'Sorento': ['2.4L', '3.5L'],
+   'Sportage': ['2.4L', '2.0L']},
+  'Mercedes': {'C-Class': ['3.0L', '3.5L'],
+   'E-Class': ['5.5L', '3.5L', '3.0L'],
+   'G-Class': ['5.5L'],
+   'GL-Class': ['5.5L', '3.0L'],
+   'GLK-Class': ['3.5L'],
+   'R-Class': ['3.0L', '3.5L'],
+   'M-Class': ['3.5L', '3.0L', '5.5L'],
+   '5': ['3.0L'],
+   'SL-Class': ['5.5L'],
+   'SLK-Class': ['3.0L'],
+   '7': ['4.4L']},
+  'AMG': {'C-Class': ['6.3L'],
+   'CL-Class': ['5.5L', '6.0L'],
+   'E-Class': ['6.2L'],
+   'SL-Class': ['6.2L']},
+  'Mazda': {'CX-7': ['2.5L', '2.3L'],
+   'CX-9': ['3.7L'],
+   'Mazda2': ['1.5L'],
+   'Mazda3': ['2.0L', '2.5L'],
+   'Mazdaspeed3': ['2.3L'],
+   'Mazda6': ['2.5L', '3.7L'],
+   'MX-5': ['2.0L'],
+   'RX-8': ['1.3L'],
+   'Tribute': ['2.5L', '3.0L']},
+  'BMW Motorrad': {'1': ['3.0L'], '3': ['3.0L'], '5': ['3.0L']},
+  'Mercedes-Benz': {'CL-Class': ['5.5L', '4.6L'],
+   'GL-Class': ['4.6L'],
+   'SLK-Class': ['3.5L']},
+  'Mercedes-AMG': {'CLS-Class': ['6.2L'],
+   'G-Class': ['5.4L'],
+   'SL-Class': ['6.0L']},
+  'Mitsubishi': {'Eclipse': ['2.4L', '3.8L'],
+   'Endeavor': ['3.8L'],
+   'Galant': ['2.4L'],
+   'Lancer': ['2.0L', '2.4L'],
+   'Outlander': ['3.0L', '2.0L']},
+  'Cadillac': {'CTS-V': ['6.2L'],
+   'CTS': ['3.0L', '3.6L'],
+   'Escalade': ['6.2L', '6.0L'],
+   'DTS': ['4.6L'],
+   'SRX': ['3L'],
+   'STS': ['3.6L']},
+  'Infiniti': {'EX': ['3.5L'],
+   'FX': ['3.5L', '5.0L'],
+   'M': ['3.7L', '5.6L'],
+   'G25': ['2.5L'],
+   'G37': ['3.7L'],
+   'IPL': ['3.7L'],
+   'QX56': ['5.6L']},
+  'Dodge': {'Avenger': ['2.4L', '3.6L'],
+   'Caliber': ['2.0L', '2.4L'],
+   'Challenger': ['3.6L', '5.7L', '6.4L'],
+   'Charger': ['3.6L', '5.7L'],
+   'Durango': ['3.6L', '5.7L'],
+   'Grand': ['3.6L'],
+   'Journey': ['2.4L', '3.6L'],
+   'Nitro': ['4.0L'],
+   'ActiveHybrid': ['4.4L'],
+   'Ram': ['3.7L', '4.7L', '5.7L'],
+   'Dakota': ['3.7L', '4.7L']},
+  'Lincoln': {'MKS': ['3.7L', '3.5L'],
+   'MKT': ['3.5L', '3.7L'],
+   'MKX': ['3.7L'],
+   'MKZ': ['3.5L'],
+   'Navigator': ['5.4L'],
+   'Town': ['4.6L']},
+  'GMC': {'Acadia': ['3.6L'],
+   'Canyon': ['2.9L', '3.7L', '5.3L'],
+   'Terrain': ['2.4L', '3.0L'],
+   'Yukon': ['5.3L', '6.2L', '6.0L'],
+   'Savana': ['5.3L', '4.8L', '6.0L', '4.3L'],
+   'Sierra': ['4.3L', '4.8L', '5.3L', '6.2L', '6.0L']},
+  'Porsche': {'911': ['3.8L', '3.6L'],
+   'Boxster': ['3.4L', '2.9L'],
+   'Cayenne': ['3.0L', '3.6L', '4.8L'],
+   'Cayman': ['2.9L', '3.4L']},
+  'Jeep': {'Compass': ['2.0L', '2.4L'],
+   'Liberty': ['3.7L'],
+   'Patriot': ['2.0L', '2.4L'],
+   'Wrangler': ['3.8L']},
+  'Acura': {'MDX': ['3.7L'],
+   'RDX': ['2.3L'],
+   'ZDX': ['3.7L'],
+   'RL': ['3.7L'],
+   'TL': ['3.5L', '3.7L'],
+   'TSX': ['2.4L', '3.5L']},
+  'Subaru': {'Forester': ['2.5L'],
+   'Impreza': ['2.5L'],
+   'Legacy': ['3.6L', '2.5L'],
+   'Outback': ['2.5L', '3.6L']},
+  'Buick': {'Enclave': ['3.6L'],
+   'Lacrosse': ['2.4L', '3.6L'],
+   'Lucerne': ['3.9L', '4.6L'],
+   'Regal': ['2.0L', '2.4L']},
+  'Suzuki': {'Grand': ['2.4L'],
+   'Kizashi': ['2.4L'],
+   'SX4': ['2.0L'],
+   'Equator': ['4.0L', '2.5L']},
+  'Saab': {'9-3': ['2.0L'], '9-4X': ['3.0L', '2.8L'], '9-5': ['2.0L', '2.8L']},
+  'Aston Martin': {'Martin': ['Martin']},
+  'Grand Cherokee': {'Grand': ['3.6L', '5.7L']},
+  'Land Rover': {'Rover': ['Rover']},
+  'Chrysler': {'200': ['2.4L', '3.6L'],
+   '300': ['3.6L', '5.7L'],
+   'Town': ['3.6L']},
+  'Scion': {'tC': ['2.5L'], 'xB': ['2.4L'], 'xD': ['1.8L']},
+  'MINI': {'Cooper': ['1.6L'], 'Clubman': ['1.6L'], 'Countryman': ['1.6L']},
+  'Jaguar': {'XJ': ['5.0L'], 'XK': ['5.0L'], 'XF': ['5.0L']},
+  'Lotus': {'Elise': ['1.8L'], 'Evora': ['3.5L'], 'Exige': ['1.8L']},
+  'Maserati': {'GranTurismo': ['4.2L', '4.7L'],
+   'Quattroporte': ['4.2L', '4.7L']},
+  'Mercury': {'Grand': ['4.6L'],
+   'Mariner': ['2.5L', '3.0L'],
+   'Milan': ['2.5L', '3.0L']}}}
+   window.onload = function () {
+    var stateSel = document.getElementById("stateSel"),
+        countySel = document.getElementById("countySel"),
+        citySel = document.getElementById("citySel"),
+        engineSel = document.getElementById("engineSel");
+    for (var state in stateObject) {
+        stateSel.options[stateSel.options.length] = new Option(state, state);
+    }
+    stateSel.onchange = function () {
+        countySel.length = 1; // remove all options bar first
+        citySel.length = 1; // remove all options bar first
+        engineSel.length = 1;
+        if (this.selectedIndex < 1) return; // done
+        for (var county in stateObject[this.value]) {
+            countySel.options[countySel.options.length] = new Option(county, county);
+        }
+    }
+    stateSel.onchange(); // reset in case page is reloaded
+    countySel.onchange = function () {
+        citySel.length = 1; // remove all options bar first
+        engineSel.length = 1;
+        if (this.selectedIndex < 1) return; // done
+        var cities = stateObject[stateSel.value][this.value];
+        for (var city in stateObject[stateSel.value][this.value]) {
+            citySel.options[citySel.options.length] = new Option(city, city);
+        }
+    }
+    stateSel.onchange();
+    countySel.onchange();
+    citySel.onchange = function (){
+        engineSel.length = 1;
+        if (this.selectedIndex < 1) return;
+        var engines = stateObject[stateSel.value][countySel.value][this.value];
+        for (var i = 0; i < engines.length; i++) {
+            engineSel.options[engineSel.options.length] = new Option(engines[i], engines[i]);
+    }
+}
+}
+function create_get() {
+    console.log("create get is working!")
+    console.log($('#stateSel').val())
+    console.log($('#countySel').val())
+    console.log($('#citySel').val())
+    console.log($('#engineSel').val())
+    console.log($('#part_input').val())
+
+}
+
+$(document).ready(function() {
+    $('#myForm').on('submit', function(event) {
+        event.preventDefault();
+        console.log("form submitted!")
+        $('.container-fluid.bg-3.text-center').text('Loading...');
+        console.log($('#stateSel').val())
+        var year_input = $('#stateSel').val()
+        var make_input = $('#countySel').val()
+        var model_input = $('#citySel').val()
+        var engine_input = $('#engineSel').val()
+        var part_input = $('#part_input').val()
+
+        $.ajax({
+            type:"GET",
+            url: 'search_result?optone=' + year_input + '&opttwo=' + make_input + '&optthree=' + model_input + '&optfour=' + engine_input + '&user_part_input=' + part_input,
+            success: function(data) {
+                $('.container-fluid.bg-3.text-center').html(data);
+    },
+    dataType: 'html',
+  });
+
+});
+    });
+    </script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Auto Part Search Helper</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron">
+  <div class="container text-center">
+      <h2 class="display-4">Multiple auto part websites in one search!</h2>
+      <h4 class="display-4">Supports RockAuto, eBay, AutoZone and PartsGeek</h4>
+<form name="myform" id="myForm" method="get" action="/search_result">
+    <select class="form-control" name="optone" id="stateSel">
+        <option value="" selected="selected">Year</option>
+    </select>
+    <select class="form-control" name="opttwo" id="countySel">
+        <option value="" selected="selected">Make</option>
+    </select>
+    <select class="form-control" name="optthree" id="citySel">
+        <option value="" selected="selected">Model</option>
+    </select>
+    <select class="form-control" name="optfour" id="engineSel">
+        <option value="" selected="selected">Engine</option>
+    </select>
+    <input class="form-control" type="text" id="part_input" name="user_part_input" placeholder="What part do you need?">
+    <input class="btn btn-primary btn-block" type="submit" value="Submit">
+</form>
+</div>
+  </div>
+
+<div class="container-fluid bg-3 text-center">
+        <div class="media">
+              <img class="d-flex align-self-start" src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?h=350&auto=compress&cs=tinysrgb" alt="Generic placeholder image">
+              <div class="media-body pl-3">
+                <div class="price">$799,000<small>Radiator DENSO 221-0506 fits 02-06 Toyota Camry</small></div>
+                <div class="stats">
+                    <span><i class="fa fa-arrows-alt"></i>1678 Sq ft</span>
+                    <span><i class="fa fa-bath"></i>2 Beadrooms</span>
+                </div>
+                <div class="address">4062 Walnut Hill Drive
+            Cincinnati</div>
+              </div>
+            </div>
+        <div class="media">
+            <div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>
+</div>
+              <img class="d-flex align-self-start" src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?h=350&auto=compress&cs=tinysrgb" alt="Generic placeholder image">
+              <div class="media-body pl-3">
+                <div class="price">$506,400<small>New York</small></div>
+                <div class="stats">
+                    <span><i class="fa fa-arrows-alt"></i>1678 Sq ft</span>
+                    <span><i class="fa fa-bath"></i>2 Beadrooms</span>
+                </div>
+                <div class="address">4062 Walnut Hill Drive
+            Cincinnati</div>
+              </div>
+            </div>
+        <div class="media">
+            <div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>
+</div>
+              <img class="d-flex align-self-start" src="https://images.pexels.com/photos/358636/pexels-photo-358636.jpeg?h=350&auto=compress&cs=tinysrgb" alt="Generic placeholder image">
+              <div class="media-body pl-3">
+                <div class="price">$506,400<small>New York</small></div>
+                <div class="stats">
+                    <span><i class="fa fa-arrows-alt"></i>1678 Sq ft</span>
+                    <span><i class="fa fa-bath"></i>2 Beadrooms</span>
+                </div>
+                <div class="address">4062 Walnut Hill Drive
+            Cincinnati</div>
+              </div>
+            </div>
+        <div class="media">
+            <div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>
+</div>
+              <img class="d-flex align-self-start" src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?h=350&auto=compress&cs=tinysrgb" alt="Generic placeholder image">
+              <div class="media-body pl-3">
+                <div class="price">$799,000<small>New York</small></div>
+                <div class="stats">
+                    <span><i class="fa fa-arrows-alt"></i>1678 Sq ft</span>
+                    <span><i class="fa fa-bath"></i>2 Beadrooms</span>
+                </div>
+                <div class="address">4062 Walnut Hill Drive
+            Cincinnati</div>
+              </div>
+            </div>
+        <div class="media">
+            <div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>
+</div>
+              <img class="d-flex align-self-start" src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?h=350&auto=compress&cs=tinysrgb" alt="Generic placeholder image">
+              <div class="media-body pl-3">
+                <div class="price">$506,400<small>New York</small></div>
+                <div class="stats">
+                    <span><i class="fa fa-arrows-alt"></i>1678 Sq ft</span>
+                    <span><i class="fa fa-bath"></i>2 Beadrooms</span>
+                </div>
+                <div class="address">4062 Walnut Hill Drive
+            Cincinnati</div>
+              </div>
+            </div>
+        <div class="media">
+            <div class="fav-box"><i class="fa fa-heart-o" aria-hidden="true"></i>
+</div>
+              <img class="d-flex align-self-start" src="https://images.pexels.com/photos/358636/pexels-photo-358636.jpeg?h=350&auto=compress&cs=tinysrgb" alt="Generic placeholder image">
+              <div class="media-body pl-3">
+                <div class="price">$506,400<small>New York</small></div>
+                <div class="stats">
+                    <span><i class="fa fa-arrows-alt"></i>1678 Sq ft</span>
+                    <span><i class="fa fa-bath"></i>2 Beadrooms</span>
+                </div>
+                <div class="address">4062 Walnut Hill Drive
+            Cincinnati</div>
+              </div>
+            </div>
+		</div>
+<br>
+
+<footer class="container-fluid text-center">
+  <p>Footer Text</p>
+</footer>
+
+</body>
+</html>
