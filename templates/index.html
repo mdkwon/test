@@ -3,16 +3,20 @@
 <head>
   <title>Auto Part Search Helper</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel='icon' href='https://i.ibb.co/7gB2rVg/Free-Sample-By-Wix.jpg' type='image/x-icon'/ >
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
+   .navbar-custom {
+    background-color: #222222;
+}
+	.navbar-custom .navbar-brand {
+  color: #FFFFFF;
+		font-size: larger;
+		font-weight: bold;
+}
 
     /* Add a gray background color and some padding to the footer */
     footer {
@@ -761,30 +765,19 @@ $(document).ready(function() {
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Auto Part Search Helper</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-      </ul>
-    </div>
-  </div>
+<nav class="navbar navbar-custom">
+  <a class="navbar-brand" href="#">
+    <img src="https://i.ibb.co/7gB2rVg/Free-Sample-By-Wix.jpg" " width="30" height="30" class="d-inline-block align-top" alt="">
+    AP Part Search
+  </a>
 </nav>
 
 <div class="jumbotron">
   <div class="container text-center">
-      <h2 class="display-4">Multiple auto part websites in one search!</h2>
-      <h4 class="display-4">Supports RockAuto, eBay, AutoZone and PartsGeek</h4>
+      <h1>Multiple auto part stores in one search!</h1>
+      <h4>No need to put your vehicle info multiple times!</h4>
+	  <h4>Support RockAuto, eBay, AutoZone, and PartsGeek</h4>
+	  <br>
 <form name="myform" id="myForm" method="get" action="/search_result">
     <select class="form-control" name="optone" id="stateSel">
         <option value="" selected="selected">Year</option>
@@ -803,20 +796,120 @@ $(document).ready(function() {
 </form>
 </div>
   </div>
-
-<div class="container mt-3">
-  <h2>Media Object</h2>
-  <p>Create a media object with the .media and .media-body classes:</p>
-  <div class="media border p-3">
-    <img src="img_avatar3.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
-    <div class="media-body">
-      <h4>John Doe <small><i>Posted on February 19, 2016</i></small></h4>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </div>
-  </div>
+<div class="container text-center">
+    <hgroup class="mb20">
+		<h1>Search Results</h1>
+		<h2 class="lead"><strong class="text-danger">3</strong> results were found for the search for <strong class="text-danger">Lorem</strong></h2>
+	</hgroup>
 </div>
-<footer class="container-fluid text-center">
-  <p>Footer Text</p>
+<br>
+<div class="container">
+    <section class="col-xs-12 col-sm-6 col-md-12">
+		<hr>
+		<article class="search-result row">
+			<div class="col-xs-12 col-sm-12 col-md-3">
+				<a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-2">
+				<ul>
+					<p class="h2">$40.00</p>
+				</ul>
+
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-7">
+
+				<h4><a href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h4>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>
+                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+			</div>
+			<span class="clearfix borda"></span>
+		</article>
+		<hr>
+		<article class="search-result row">
+			<div class="col-xs-12 col-sm-12 col-md-3">
+				<a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-2">
+				<ul>
+					<p class="h2">$40.00</p>
+				</ul>
+
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-7">
+
+				<h4><a href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h4>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>
+                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+			</div>
+			<span class="clearfix borda"></span>
+		</article>
+		<hr>
+		<article class="search-result row">
+			<div class="col-xs-12 col-sm-12 col-md-3">
+				<a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-2">
+				<ul>
+					<p class="h2">$40.00</p>
+				</ul>
+
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-7">
+
+				<h4><a href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h4>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>
+                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+			</div>
+			<span class="clearfix borda"></span>
+		</article>
+		<hr>
+		<article class="search-result row">
+			<div class="col-xs-12 col-sm-12 col-md-3">
+				<a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-2">
+				<ul>
+					<p class="h2">$40.00</p>
+				</ul>
+
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-7">
+
+				<h4><a href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h4>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>
+                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+			</div>
+			<span class="clearfix borda"></span>
+		</article>
+		<hr>
+		<article class="search-result row">
+			<div class="col-xs-12 col-sm-12 col-md-3">
+				<a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-2">
+				<ul>
+					<p class="h2">$40.00</p>
+				</ul>
+
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-7">
+
+				<h4><a href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h4>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>
+                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+			</div>
+			<span class="clearfix borda"></span>
+		</article>
+
+	</section>
+</div>
+<br>
+<footer>
+	<div class="container text-center">
+  <p>AP Part Search LLC. Created by: Kwon Hur</p>
+  <p>Contact at:  <a href="hknuno@hotmail.com">
+  hknuno@hotmail.com</a></p>
+		</div>
 </footer>
 
 </body>
