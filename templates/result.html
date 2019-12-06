@@ -2,28 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Result</title>
+    <title>Parts for </title>
 </head>
 <body>
-<h3>result for {{ google_corrected_query }}</h3>
-<h1></h1>
-<h1></h1>
-<h1></h1>
-<h1></h1>
-<h1></h1>
+
+{% for part in rockauto_function_returns|dictsort:"price" %}
+    *{{ part.price }}{{ part.image_link }}{{ part.list_text }}{{ part.part_href }}{{ part.manufacturer+part_number }}{{ part.website }}
+{% endfor %}
 
 
-
-<h1>Rockauto lowest price is: {{ rockauto_lowest_price }}</h1>
-<h2><a href="{{ rockauto_curr_url }}" target="_blank">Rockauto link to the part</a></h2>
-<h2><img src="{{ rockauto_cheapest_item_image_link }}"></h2>
-<h1></h1>
-<h1></h1>
-<h2><a href="{{ ebay_cheapest_item_absolute_link }}" target ="_blank">ebay link to the cheapest item</a></h2>
-<h2><a href="{{ curr_url }}" target="_blank">ebay link to the list of parts</a></h2>
-<h2>{{ ebay_cheapest_item_photo_link }}</h2>
-<h2><img src="{{ ebay_cheapest_item_photo_link }}"></h2>
-<h2>ebay lowest price is: {{ ebay_cheapest_item_price }}</h2>
+{#<hr>#}
+{#		<div class="row">#}
+{#			<div class="col-auto shrink">#}
+{#				<a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>#}
+{#			</div>#}
+{#			<div class="col-xs-2 col-sm-12 col-md-2">#}
+{#				<h2>$50.00</h2>#}
+{##}
+{#			</div>#}
+{#			<div class="col-xs-7 col-sm-12 col-md-7">#}
+{##}
+{#				<h4><a href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h4>#}
+{#				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>#}
+{#                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>#}
+{#			</div>#}
+{#		</div>#}
+{#		<span class="clearfix borda"></span>#}
+{#		<hr>#}
+{#	<div class="row">#}
+{#			<div class="col-auto shrink">#}
+{#				<a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>#}
+{#			</div>#}
+{#			<div class="col-xs-2 col-sm-12 col-md-2">#}
+{#				<h2>$50.00</h2>#}
+{##}
+{#			</div>#}
+{#			<div class="col-xs-7 col-sm-12 col-md-7">#}
+{##}
+{#				<h4><a href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h4>#}
+{#				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>#}
+{#                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>#}
+{#			</div>#}
+{#		</div>#}
+{#		<span class="clearfix borda"></span>#}
+{#	<hr>#}
+{#	<div class="row">#}
+{#			<div class="col-auto shrink">#}
+{#				<a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>#}
+{#			</div>#}
+{#			<div class="col-xs-2 col-sm-12 col-md-2">#}
+{#				<h2>$50.00</h2>#}
+{##}
+{#			</div>#}
+{#			<div class="col-xs-7 col-sm-12 col-md-7">#}
+{##}
+{#				<h4><a href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h4>#}
+{#				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>#}
+{#                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>#}
+{#			</div>#}
+{#		</div>#}
+{#		<span class="clearfix borda"></span>#}
 
 </body>
 </html>

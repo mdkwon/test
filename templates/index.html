@@ -744,7 +744,7 @@ $(document).ready(function() {
     $('#myForm').on('submit', function(event) {
         event.preventDefault();
         console.log("form submitted!")
-        $('.container-fluid.bg-3.text-center').text('Loading...');
+        $('.container').text('Loading...');
         console.log($('#stateSel').val())
         var year_input = $('#stateSel').val()
         var make_input = $('#countySel').val()
@@ -756,13 +756,14 @@ $(document).ready(function() {
             type:"GET",
             url: 'search_result?optone=' + year_input + '&opttwo=' + make_input + '&optthree=' + model_input + '&optfour=' + engine_input + '&user_part_input=' + part_input,
             success: function(data) {
-                $('.container-fluid.bg-3.text-center').html(data);
+                $('.container').html(data);
     },
     dataType: 'html',
   });
 
 });
     });
+
     </script>
 
 </head>
@@ -781,7 +782,7 @@ $(document).ready(function() {
       <h4>No need to put your vehicle info multiple times!</h4>
 	  <h4>Support RockAuto, eBay, AutoZone, and PartsGeek</h4>
 	  <br>
-<form name="myform" id="myForm" method="get" action="/search_result">
+<form name="myform" id="myform" method="get" action="/search_result">
     <select class="form-control" name="optone" id="stateSel">
         <option value="" selected="selected">Year</option>
     </select>
@@ -807,57 +808,7 @@ $(document).ready(function() {
 </div>
 <br>
 <div class="container">
-		<hr>
-		<div class="row">
-			<div class="col-auto shrink">
-				<a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>
-			</div>
-			<div class="col-xs-2 col-sm-12 col-md-2">
-				<h2>$50.00</h2>
 
-			</div>
-			<div class="col-xs-7 col-sm-12 col-md-7">
-
-				<h4><a href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>
-                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
-			</div>
-		</div>
-		<span class="clearfix borda"></span>
-		<hr>
-	<div class="row">
-			<div class="col-auto shrink">
-				<a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>
-			</div>
-			<div class="col-xs-2 col-sm-12 col-md-2">
-				<h2>$50.00</h2>
-
-			</div>
-			<div class="col-xs-7 col-sm-12 col-md-7">
-
-				<h4><a href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>
-                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
-			</div>
-		</div>
-		<span class="clearfix borda"></span>
-	<hr>
-	<div class="row">
-			<div class="col-auto shrink">
-				<a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>
-			</div>
-			<div class="col-xs-2 col-sm-12 col-md-2">
-				<h2>$50.00</h2>
-
-			</div>
-			<div class="col-xs-7 col-sm-12 col-md-7">
-
-				<h4><a href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>
-                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
-			</div>
-		</div>
-		<span class="clearfix borda"></span>
 </div>
 <br>
 <footer>
