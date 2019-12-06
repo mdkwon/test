@@ -7,11 +7,11 @@ import itertools
 def rockauto(part_input_query, make_query, year_query, model_query):
     master_list = []
     session = HTMLSession()
-    driver = webdriver.Chrome("C:/Users/Kwon/Downloads/chromedriver.exe")
-    driver_autozone = webdriver.Chrome("C:/Users/Kwon/Downloads/chromedriver.exe")
-    driver_ebay = webdriver.Chrome("C:/Users/Kwon/Downloads/chromedriver.exe")
-    driver_partsgeek = webdriver.Chrome("C:/Users/Kwon/Downloads/chromedriver.exe")
-    driver_google_shopping = webdriver.Chrome("C:/Users/Kwon/Downloads/chromedriver.exe")
+    driver = webdriver.Chrome("/chromedriver/chromedriver")
+    driver_autozone = webdriver.Chrome("/chromedriver/chromedriver")
+    driver_ebay = webdriver.Chrome("/chromedriver/chromedriver")
+    driver_partsgeek = webdriver.Chrome("/chromedriver/chromedriver")
+    driver_google_shopping = webdriver.Chrome("/chromedriver/chromedriver")
     r = session.get('http://google.com/search?q=' + part_input_query)
     sleep(1)
     corrected_query = r.html.find('#fprsl')
